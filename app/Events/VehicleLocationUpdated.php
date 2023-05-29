@@ -10,18 +10,19 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class VehicleLocationUpdated
+class VehicleLocationUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+    public $msg;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct( $msg="x;dfil")
     {
-        //
+        $this->msg = $msg;
     }
 
     /**
@@ -31,6 +32,16 @@ class VehicleLocationUpdated
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('vehicle.update');
+    }
+
+    public function broadcastAS(){
+        return "vehicle.update";
+    }
+
+    public function broadcastWith(){
+        return [
+            "name" =>"dawd"
+        ];
     }
 }

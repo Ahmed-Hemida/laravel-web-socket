@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', function () {
+    return view('test');
+});
+Route::get('/vehice/event', function () {
+    event(new App\Events\VehicleLocationUpdated('hello world'));
+});

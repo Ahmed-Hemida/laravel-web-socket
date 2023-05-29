@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccc98dc8c81c3711492e9b4430b52b77",
+    "content-hash": "88e3fe3ed0ae618cca5ee392badf9dca",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -8919,7 +8919,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "beyondcode/laravel-websockets": 10
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
