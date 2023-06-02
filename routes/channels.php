@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Broadcast;
 | used to check if an authenticated user can listen to the channel.
 |
 */
-Broadcast::routes(['middleware' => ['web', 'auth']]);
+Broadcast::routes();
+
+Broadcast::routes(['middleware' => ['auth:sanctum']]);
+
 
 Broadcast::channel('private-channel', function ($user) {
     return $user !== null;
@@ -26,6 +29,8 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('presence-websocket', function ($user) {
-    return true; // You can add authorization logic here if needed
+Broadcast::channel('presence-websocket', function () {
+    return [
+        'data'=>'me'
+    ];  
 });

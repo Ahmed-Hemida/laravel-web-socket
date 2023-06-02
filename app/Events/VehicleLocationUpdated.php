@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
@@ -14,14 +13,18 @@ use Illuminate\Queue\SerializesModels;
 class VehicleLocationUpdated implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-   
+
+    public $msg;
+
     /**
      * Create a new event instance.
      *
+     * @param string $msg
      * @return void
      */
-    public function __construct()
+    public function __construct($msg)
     {
+        $this->msg = $msg;
     }
 
     /**
@@ -31,18 +34,19 @@ class VehicleLocationUpdated implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        // return  'presence-websocket';
-        return new Channel('presence-websocket');
+        return new Channel('presence.websocket');
     }
 
-    public function broadcastAS(){
-        return "vehicle.update";
+    public function broadcastAs()
+    {
+        return 'playground';
     }
 
     public function broadcastWith()
-        {
-            return [
-                "name" => "dawd"
-            ];
-        }
+    {
+        
+        return [
+            'msg' => $this->msg
+        ];
+    }
 }

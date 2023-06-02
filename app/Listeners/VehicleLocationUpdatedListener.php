@@ -26,6 +26,6 @@ class VehicleLocationUpdatedListener
      */
     public function handle(VehicleLocationUpdated $event)
     {
-        //
+      return   $event->broadcastWith();
     }
 }

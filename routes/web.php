@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Events\VehicleLocationUpdated;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/  
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +24,21 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return view('test');
 });
-Route::get('/vehice/event', function () {
-    return App\Events\VehicleLocationUpdated::dispatch();
+
+Route::get('/msg', function (Request $request) {
+    $msg = Request::input('msg')??"not found";
+
+    return event(new VehicleLocationUpdated( $msg));
+     return null; 
+
+});
+
+Route::post('/broadcasting/auth', function (Request $request) {
+    // Authenticate the request and return the user or false
+    
+    if (Auth::check()) {
+        return Auth::user();
+    }
+    
+    return false;
 });
