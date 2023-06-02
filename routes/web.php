@@ -20,5 +20,5 @@ Route::get('/test', function () {
     return view('test');
 });
 Route::get('/vehice/event', function () {
-    event(new App\Events\VehicleLocationUpdated('hello world'));
+    return App\Events\VehicleLocationUpdated::dispatch();
 });

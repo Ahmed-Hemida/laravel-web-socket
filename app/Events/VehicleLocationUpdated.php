@@ -7,22 +7,21 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class VehicleLocationUpdated implements ShouldBroadcast
+class VehicleLocationUpdated implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $msg;
-
+   
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct( $msg="x;dfil")
+    public function __construct()
     {
-        $this->msg = $msg;
     }
 
     /**
@@ -32,16 +31,18 @@ class VehicleLocationUpdated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('vehicle.update');
+        // return  'presence-websocket';
+        return new Channel('presence-websocket');
     }
 
     public function broadcastAS(){
         return "vehicle.update";
     }
 
-    public function broadcastWith(){
-        return [
-            "name" =>"dawd"
-        ];
-    }
+    public function broadcastWith()
+        {
+            return [
+                "name" => "dawd"
+            ];
+        }
 }
