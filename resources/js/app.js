@@ -6,11 +6,10 @@ const channel = Echo.channel('presence.websocket');
 
 channel.subscribed(() => {
     console.log("Subscribed!"); 
-}).listen('.playground', (event) => {
+}).listen('.App\\Events\\VehicleLocationUpdated', (event) => {
     console.log("Event received:", event);
-    debugger
 });
-channel.listen('.playground', (event) => {
+channel.listen('.App\\Events\\VehicleLocationUpdated', (event) => {
     console.log("Event received:", event);
 });
 

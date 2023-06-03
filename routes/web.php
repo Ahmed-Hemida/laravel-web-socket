@@ -28,8 +28,7 @@ Route::get('/test', function () {
 Route::get('/msg', function (Request $request) {
     $msg = Request::input('msg')??"not found";
 
-    return event(new VehicleLocationUpdated( $msg));
-     return null; 
+    return Event::dispatch(new VehicleLocationUpdated( $msg));
 
 });
 

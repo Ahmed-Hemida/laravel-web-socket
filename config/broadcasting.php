@@ -41,7 +41,8 @@ return [
             'scheme' => 'http'
         ],
     ],
-
+    'auth' => true,
+    'debug' => true,
 
     'connections' => [
 

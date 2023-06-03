@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Broadcast;
 */
 Broadcast::routes();
 
-Broadcast::routes(['middleware' => ['auth:sanctum']]);
+// Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
 
 Broadcast::channel('private-channel', function ($user) {
@@ -29,8 +29,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('presence-websocket', function () {
-    return [
-        'data'=>'me'
-    ];  
+Broadcast::channel('presence.websocket', function ($user) {
+    return true;
 });

@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class VehicleLocationUpdated implements ShouldBroadcastNow
+class VehicleLocationUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -37,9 +37,13 @@ class VehicleLocationUpdated implements ShouldBroadcastNow
         return new Channel('presence.websocket');
     }
 
-    public function broadcastAs()
+    // public function broadcastAs()
+    // {
+    //     return 'playground';
+    // }
+    public function authorize($user)
     {
-        return 'playground';
+        return true;
     }
 
     public function broadcastWith()
